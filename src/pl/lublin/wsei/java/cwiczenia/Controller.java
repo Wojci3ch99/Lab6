@@ -1,18 +1,33 @@
 package pl.lublin.wsei.java.cwiczenia;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Controller {
     public Label lbFile;
     public ListView lstNoblisci;
     public String imieNazwisko;
+    public TextField textRok;
+    public TextField textDziedzina;
+    public TextField textKraj;
+    public TextField textMotywacja;
+
+    private Noblista selNoblista;
 
     ObservableList<String> imieNazwiskoList = FXCollections.observableArrayList();
     NoblisciList nbList;
@@ -22,7 +37,32 @@ public class Controller {
     FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Pliki CSV (*.csv)", "*.csv");
 
     public void initialize() {
+
         fileChooser.getExtensionFilters().add(csvFilter);
+        lstNoblisci.getSelectionModel().selectedIndexProperty().addListener(
+                new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observableValue, Number old_val, Number new_val) {
+                        int index = new_val.intValue();
+                        if (index != -1 ){
+                            selNoblista = nbList.Lista.get(index);
+                            textRok.setText(selNoblista.Rok);
+                            textDziedzina.setText(selNoblista.Kategoria);
+                            textKraj.setText(selNoblista.Kraj);
+                            textMotywacja.setText(selNoblista.Uzasadnienie);
+
+                        }
+                        else{
+                            textRok.setText(" ");
+                            textDziedzina.setText(" ");
+                            textKraj.setText(" ");
+                            textMotywacja.setText(" ");
+                            selNoblista = null;
+                        }
+                    }
+                }
+        );
+
     }
 
     public void btnOpenFileAction(ActionEvent actionEvent) {
@@ -35,6 +75,7 @@ public class Controller {
                 imieNazwiskoList.add(imieNazwisko);
             }
             lstNoblisci.setItems(imieNazwiskoList);
+
         }
         else
             {
