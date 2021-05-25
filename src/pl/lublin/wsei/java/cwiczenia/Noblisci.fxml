@@ -28,6 +28,6 @@
       <TextField fx:id="textKraj" layoutX="479.0" layoutY="302.0" prefHeight="34.0" prefWidth="198.0" />
       <Label layoutX="476.0" layoutY="371.0" text="MOTYWACJA :" />
       <TextField fx:id="textMotywacja" layoutX="479.0" layoutY="398.0" prefHeight="34.0" prefWidth="297.0" />
-      <Button fx:id="btnExport" layoutX="489.0" layoutY="492.0" mnemonicParsing="false" onAction="#btnOpenFileAction" prefHeight="47.0" prefWidth="104.0" text="EKSPORT" />
+      <Button fx:id="buttonExport" layoutX="489.0" layoutY="492.0" mnemonicParsing="false" onAction="#btnExport" prefHeight="47.0" prefWidth="104.0" text="EKSPORT" />
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -26,8 +27,8 @@ public class Controller {
     public TextField textDziedzina;
     public TextField textKraj;
     public TextField textMotywacja;
-
     private Noblista selNoblista;
+    public Button buttonExport;
 
     ObservableList<String> imieNazwiskoList = FXCollections.observableArrayList();
     NoblisciList nbList;
@@ -35,6 +36,7 @@ public class Controller {
 
     FileChooser fileChooser = new FileChooser();
     FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Pliki CSV (*.csv)", "*.csv");
+
 
     public void initialize() {
 
@@ -83,4 +85,23 @@ public class Controller {
         }
     }
 
+    public void btnExport(ActionEvent actionEvent){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Export.fxml"));
+            Parent root = loader.load();
+
+            Export controller = loader.getController();
+            if(nbList!=null){
+                controller.setNoblisci(nbList);
+            }
+
+            Stage stage = new Stage();
+            stage.setTitle("Export Danych");
+            stage.setScene(new Scene(root, 500, 400));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
