@@ -18,7 +18,7 @@ public class Noblista {
         Pattern pat = Pattern.compile("(?:([^,]*)(?:[^,-]|))");
         DataRow = tekst;
         Matcher m = pat.matcher(tekst);
-        List<String> data = new ArrayList<String>();
+        List<String> data = new ArrayList();
         while (m.find()) {
             for (int j = 1; j <= m.groupCount(); j++) {
                 if (m.group(0) != "") data.add(m.group(0));
